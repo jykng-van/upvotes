@@ -1,38 +1,58 @@
-.App {
-  text-align: center;
+.upvote-list{
+  display:flex;
+  flex-direction: row;
+  margin:1rem 0;
+  gap:1rem;
+  align-items: center;
+  padding:0 1rem;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.upvotes-container{
+  display:flex;
+  flex-direction: row;
+  flex:1;
+  border:.1rem solid #343A40;
+  border-radius:.25rem;
+  padding:.25rem;
+  box-sizing: border-box;
+  min-height:2.5rem;
+  gap:.25rem;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+button{
+  background:#F4F6F8;
+  display:inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  border:.1rem solid #000;
+  border-radius:.25rem;
+  cursor: pointer;
+}
+button.upvote{
+  width:2rem;
+  height:2rem;
+}
+.upvote.default{
+  background:#F4F6F8;
+}
+.upvote .arrow{
+  display:block;
+  width:1.5rem;
+  height:1.5rem;
+  mask:no-repeat url(arrow-up.svg) center / cover;
+  background-color:#343A40;
+}
+.upvote.selected{
+  background:#E5E8FD;
+}
+.upvote.selected .arrow{
+  background-color:#253CF2
 }
 
-.App-link {
-  color: #61dafb;
+button.add-upvote{
+  width:2.5rem;
+  height:2.5rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button img{
+  width:2rem;
+  height:2rem;
 }
