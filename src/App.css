@@ -16,6 +16,7 @@
   box-sizing: border-box;
   min-height:2.5rem;
   gap:.25rem;
+  flex-wrap:wrap;
 }
 button{
   background:#F4F6F8;
