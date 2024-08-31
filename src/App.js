@@ -40,6 +40,7 @@ function App() {
   useEffect(()=>{
     console.log('votes changed');
     for(let vote of votes){
+      console.log(JSON.stringify(vote));
       sessionStorage.setItem(vote.name, JSON.stringify(vote));
     }
   },[votes])
@@ -51,12 +52,19 @@ function App() {
       return v;
     }));
   }
+  function changeState(name, state){
+    console.log('changeState', name, state);
+    setVotes(votes.map(v=>{
+      if (v.name===name) v.state=state;
+      return v;
+    }))
+  }
 
   return (
     <div className="App">
       {votes.map((voteInfo, i)=>(
         <div className="upvote-list">
-          <UpvoteList key={i} numVotes={voteInfo.num} initialState={voteInfo.state} name={voteInfo.name} />
+          <UpvoteList key={i} numVotes={voteInfo.num} initialState={voteInfo.state} name={voteInfo.name} stateCallback={changeState} />
           <button className="add-upvote" title="Add Upvote" onClick={()=>addUpvote(i)}><img src={Plus} alt="+" /></button>
         </div>
       ))}

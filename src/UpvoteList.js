@@ -1,7 +1,7 @@
 import Upvote from './Upvote';
 import { useEffect, useState } from 'react';
 
-export default function UpvoteList({numVotes=1, initialState='default', name}){
+export default function UpvoteList({numVotes=1, initialState='default', stateCallback, name}){
     const [voteState, setVoteState] = useState(initialState);
     const [listName, setListName] = useState(name);
 
@@ -21,25 +21,13 @@ export default function UpvoteList({numVotes=1, initialState='default', name}){
 
 
     function toggleState(){
-        if (voteState===states[0]) setVoteState(states[1]);
-        else setVoteState(states[0]);
+        let st;
+        if (voteState===states[0]) st = states[1];
+        else st = states[0];
+
+        setVoteState(st);
+        if (stateCallback) stateCallback(listName, st);
     }
-    useEffect(()=>{ //mostly just about voteState, save statechange to sessionStorage
-        console.log('voteState', voteState);
-        let storage = sessionStorage.getItem(name);
-        let vote;
-        if (storage!==null){
-            vote = JSON.parse(storage);
-            vote.state = voteState;
-        }else{
-            vote = {
-                name: listName,
-                num: numVotes,
-                state: voteState
-            }
-        }
-        sessionStorage.setItem(listName, JSON.stringify(vote));
-    }, [voteState,listName,name,numVotes]);
 
     return (
         <div className="upvotes-container">
